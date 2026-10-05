@@ -3,8 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Categorie extends Model
 {
-    //
+    protected $table = 'categories';
+
+    protected $primaryKey = 'id_categorie';
+
+    protected $fillable = [
+        'nom',
+        'description',
+    ];
+
+    public function produits(): HasMany
+    {
+        return $this->hasMany(Produit::class, 'id_categorie', 'id_categorie');
+    }
 }
